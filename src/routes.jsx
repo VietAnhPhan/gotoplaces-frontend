@@ -20,11 +20,15 @@ const router = createBrowserRouter([
     middleware: [authMiddleware],
     loader: dataLoader,
     element: <App></App>,
+    HydrateFallback: function Test() {
+      return <>This is blank page</>;
+    },
     children: [
       {
         path: "/",
         loader: homeLoader,
         element: <Home sitename={sitename} />,
+        // HydrateFallback: Setting,
       },
       {
         path: "/chats",
@@ -58,7 +62,7 @@ const router = createBrowserRouter([
           </Wrapper>
         ),
       },
-         {
+      {
         path: "/search",
         loader: friendsLoader,
         element: (
