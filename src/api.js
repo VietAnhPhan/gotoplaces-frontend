@@ -53,10 +53,32 @@ const api = {
     }
   },
 
-  getSearchContact: async (search) => {
+  getSearchPeople: async (search) => {
     try {
       const response = await fetch(
-        `${serverURL}/users?contact=${search}&search=true`,
+        `${serverURL}/users?search=${search}`,
+        {
+          method: "GET",
+          headers: { Authorization: `bearer ${token}` },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`Response status: ${response.status}`);
+      }
+
+      const result = await response.json();
+
+      return result;
+    } catch (err) {
+      console.error(err.message);
+    }
+  },
+
+   getSearchedPosts: async (search) => {
+    try {
+      const response = await fetch(
+        `${serverURL}/posts?search=${search}`,
         {
           method: "GET",
           headers: { Authorization: `bearer ${token}` },
