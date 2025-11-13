@@ -5,7 +5,7 @@ import ShareOutlinedIcon from "@mui/icons-material/ShareOutlined";
 function Post(props) {
   return (
     <>
-      <div>
+      <div className="hover:shadow-lg p-5 bg-white rounded-2xl hover:-translate-y-1 transition-all">
         <div className="flex">
           <div className="flex flex-col gap-y-5 flex-1">
             <div className="flex gap-x-4 items-center ">

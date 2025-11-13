@@ -121,9 +121,7 @@ function Explore() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                   {posts.map((post) => (
-                    <ContentWrapperNoBorder key={post.id}>
-                      <Post author={post.author} post={post} />
-                    </ContentWrapperNoBorder>
+                    <Post key={post.id} author={post.author} post={post} />
                   ))}
                 </div>
               </div>

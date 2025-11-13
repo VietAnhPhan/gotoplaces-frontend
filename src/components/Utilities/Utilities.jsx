@@ -21,4 +21,12 @@ function ContentWrapperNoBorder({ children }) {
   );
 }
 
-export { ContentWrapper, ContentWrapperNoBorder };
+function Loading() {
+  return (
+    <div className="flex justify-center items-center flex-1">
+      <h2>🌀Loading...</h2>
+    </div>
+  );
+}
+
+export { ContentWrapper, ContentWrapperNoBorder, Loading };

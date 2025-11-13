@@ -1,7 +1,8 @@
-import { Fragment, useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import api from "../../api";
 import Post from "../Post/Post";
 import { HeaderContext } from "../../Context";
+import { Loading } from "../Utilities/Utilities";
 
 function Home() {
   const [posts, setPosts] = useState([]);
@@ -20,11 +21,10 @@ function Home() {
     index + col2 + col3 + col4
   );
 
-  const headerContext = useContext(HeaderContext)
+  const headerContext = useContext(HeaderContext);
 
   useEffect(() => {
-
-     headerContext.setactiveMenuItem("home");
+    headerContext.setactiveMenuItem("home");
 
     async function fetchData() {
       const posts = await api.getPosts();
@@ -36,36 +36,31 @@ function Home() {
 
   return (
     <>
-      <div className="flex p-7 gap-x-3 overflow-auto">
-        <div className="flex flex-col gap-y-3">
-          {postsCol1.map((post) => (
-            <div key={post.id} className="p-5 bg-white rounded-2xl">
+      {posts.length === 0 && <Loading />}
+      {posts.length > 0 && (
+        <div className="flex p-7 gap-x-3 overflow-auto">
+          <div className="flex flex-col gap-y-3">
+            {postsCol1.map((post) => (
+              <Post key={post.id} author={post.author} post={post} />
+            ))}
+          </div>
+          <div className="flex flex-col gap-y-3">
+            {postsCol2.map((post) => (
               <Post author={post.author} post={post} />
-            </div>
-          ))}
-        </div>
-        <div className="flex flex-col gap-y-3">
-          {postsCol2.map((post) => (
-            <div key={post.id} className="p-5 bg-white rounded-2xl">
+            ))}
+          </div>
+          <div className="flex flex-col gap-y-3">
+            {postsCol3.map((post) => (
               <Post author={post.author} post={post} />
-            </div>
-          ))}
-        </div>
-        <div className="flex flex-col gap-y-3">
-          {postsCol3.map((post) => (
-            <div key={post.id} className="p-5 bg-white rounded-2xl">
+            ))}
+          </div>
+          <div className="flex flex-col gap-y-3">
+            {postsCol4.map((post) => (
               <Post author={post.author} post={post} />
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-        <div className="flex flex-col gap-y-3">
-          {postsCol4.map((post) => (
-            <div key={post.id} className="p-5 bg-white rounded-2xl">
-              <Post author={post.author} post={post} />
-            </div>
-          ))}
-        </div>
-      </div>
+      )}
     </>
   );
 }

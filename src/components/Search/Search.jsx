@@ -133,9 +133,7 @@ function Search() {
 
                 <div className="grid grid-cols-1 gap-y-5">
                   {posts.map((post) => (
-                    <ContentWrapperNoBorder key={post.id}>
-                      <Post author={post.author} post={post} />
-                    </ContentWrapperNoBorder>
+                    <Post key={post.id} author={post.author} post={post} />
                   ))}
                 </div>
               </div>
