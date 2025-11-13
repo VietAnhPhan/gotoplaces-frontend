@@ -6,19 +6,30 @@ function Post(props) {
   return (
     <>
       <div>
-        <div className="flex gap-x-4 items-center pb-5">
-          <img
-            src={props.author.avatarPath}
-            alt={`${props.author.fullname}'s avatar`}
-            width={60}
-            className="rounded-full"
-          />
-          <div>
-            <p>{props.author.fullname}</p>
-            <p className="text-xs">@{props.author.username}</p>
+        <div className="flex">
+          <div className="flex flex-col gap-y-5 flex-1">
+            <div className="flex gap-x-4 items-center ">
+              {/* User avatar */}
+              <img
+                src={props.author.avatarPath}
+                alt={`${props.author.fullname}'s avatar`}
+                width={60}
+                className="rounded-full"
+              />
+              {/* User Info */}
+              <div>
+                <p>{props.author.fullname}</p>
+                <p className="text-xs">@{props.author.username}</p>
+              </div>
+            </div>
+            {/* Post content */}
+            <p>{props.post.body.slice(0, 146)}</p>
           </div>
+
+          {/* Posted date */}
+          <p className="text-xs shrink-0 text-gray-600">{new Date(props.post.createdAt).toDateString()}</p>
         </div>
-        <p>{props.post.body.slice(0, 146)}</p>
+
         <div className="flex items-center gap-5 pt-3 border-t border-purple-100 mt-5">
           <FavoriteBorderOutlinedIcon /> {props.post._count.Like}
           <ChatBubbleOutlineOutlinedIcon /> {props.post._count.Comment}

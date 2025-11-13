@@ -43,6 +43,6 @@
 }
 
 .profile__form input,
-textarea {
+.profile__form textarea {
   border: 1px solid var(--color-gray-300);
 }

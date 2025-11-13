@@ -12,6 +12,7 @@ import api from "./api";
 import Home from "./components/Home/Home";
 import Search from "./components/Search/Search";
 import Explore from "./components/Explore/Explore";
+import PostList from "./components/Post/PostList";
 
 const sitename = "Myinterests";
 
@@ -78,6 +79,15 @@ const router = createBrowserRouter([
         element: (
           <Wrapper>
             <Explore sitename={sitename} />
+          </Wrapper>
+        ),
+      },
+        {
+        path: "/posts",
+        loader: dataLoader,
+        element: (
+          <Wrapper>
+            <PostList sitename={sitename} />
           </Wrapper>
         ),
       },

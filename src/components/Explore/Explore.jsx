@@ -119,7 +119,7 @@ function Explore() {
               <div className="mt-10">
                 <p>Posts</p>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                   {posts.map((post) => (
                     <ContentWrapperNoBorder key={post.id}>
                       <Post author={post.author} post={post} />

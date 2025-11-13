@@ -7,7 +7,7 @@ const Avatar = (props) => {
         <div className={styles[props.type]}>
           <img
             className="object-cover object-top w-full h-full rounded-[50%]"
-            src={`https://bkudoqbqykfhbgcxfelw.supabase.co/storage/v1/object/public/${props.user.avatarPath}`}
+            src={`${props.user.avatarPath}`}
             alt={`${props.user.name}'s avatar`}
           />
         </div>
