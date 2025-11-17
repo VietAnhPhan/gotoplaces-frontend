@@ -1,3 +1,5 @@
+import { useRouteError } from "react-router";
+
 function ContentWrapper(props) {
   // console.log(className);
   return (
@@ -29,4 +31,14 @@ function Loading() {
   );
 }
 
-export { ContentWrapper, ContentWrapperNoBorder, Loading };
+function ErrorCatching() {
+  const error = useRouteError();
+
+  return (
+    <div className="flex-1 flex items-center justify-center">
+      <p>{`Error: ${error.message}`}</p>
+    </div>
+  );
+}
+
+export { ContentWrapper, ContentWrapperNoBorder, Loading, ErrorCatching };

@@ -1,4 +1,4 @@
-import { createBrowserRouter, redirect, useRouteError } from "react-router";
+import { createBrowserRouter, redirect } from "react-router";
 import App from "./App";
 import Chat from "./components/Chat/Chat";
 import Login from "./components/Login/Login";
@@ -14,6 +14,7 @@ import Search from "./components/Search/Search";
 import Explore from "./components/Explore/Explore";
 import MyPosts from "./components/Post/MyPosts";
 import FriendList from "./components/FriendList";
+import { ErrorCatching } from "./components/Utilities/Utilities";
 
 const sitename = "Myinterests";
 
@@ -31,6 +32,7 @@ const router = createBrowserRouter([
         path: "/",
         loader: homeLoader,
         element: <Home sitename={sitename} />,
+        errorElement: <ErrorCatching />,
         // HydrateFallback: Setting,
       },
       {
@@ -82,6 +84,7 @@ const router = createBrowserRouter([
             <Explore sitename={sitename} />
           </Wrapper>
         ),
+        errorElement: <ErrorCatching />,
       },
       {
         path: "/posts",
@@ -91,11 +94,11 @@ const router = createBrowserRouter([
             <MyPosts sitename={sitename} />
           </Wrapper>
         ),
-        ErrorBoundary: function ErrorBoundary() {
-          let error = useRouteError();
-          console.error(error);
-          return <>Dang!</>;
-        },
+        // ErrorBoundary: function ErrorBoundary() {
+        //   let error = useRouteError();
+        //   console.error(error);
+        //   return <>Dang!</>;
+        // },
       },
     ],
   },
@@ -182,8 +185,8 @@ async function loginByGithub() {
 }
 async function hasLogin() {
   const access = JSON.parse(localStorage.getItem("myinterests_app_access"));
-  
-  if(!access) return;
+
+  if (!access) return;
 
   const user = await api.getUser(access.username);
   if (user) {
