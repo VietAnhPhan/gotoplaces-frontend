@@ -37,7 +37,7 @@ function Login(props) {
         })
       );
 
-      navigate("/");
+      navigate(0);
     } catch (e) {
       throw new Error(`login error: ${e.message}`);
     }
@@ -155,7 +155,8 @@ function Login(props) {
                   </a>
                   <a
                     href="/login/github"
-                    className="flex justify-center items-center gap-x-3 py-1.5 border border-gray-300 rounded-xl" target="_blank"
+                    className="flex justify-center items-center gap-x-3 py-1.5 border border-gray-300 rounded-xl"
+                    target="_blank"
                   >
                     <GitHubIcon /> Continue with Github
                   </a>
