@@ -10,11 +10,13 @@ import {
 } from "lucide-react";
 import styles from "./ContactInfo.module.css";
 import api from "../../../api";
+import DoneOutlinedIcon from '@mui/icons-material/DoneOutlined';
 
 const ContactInfo = ({ currentContact }) => {
   const userContext = useContext(UserContext);
   const [requestStatus, setrequestStatus] = useState("");
   const [friendRequest, setFriendRequest] = useState(null);
+  const [followRequestStatus, setFollowRequestStatus] = useState(null);
 
   useEffect(() => {
     async function fetchInvitations() {
@@ -40,12 +42,30 @@ const ContactInfo = ({ currentContact }) => {
         setFriendRequest(invitation);
       }
     }
+
+    async function fetchFollowRequest() {
+      if (active) {
+        const followRequest = await api.getFollowRequest(
+          userContext.id,
+          currentContact.id
+        );
+
+        if (followRequest && followRequest.status === "following") {
+          setFollowRequestStatus("Following");
+        }
+        if (followRequest && followRequest.status === "unfollow") {
+          setFollowRequestStatus("Follow");
+        }
+      }
+    }
+
     let active = true;
     fetchInvitations();
+    fetchFollowRequest();
     return () => {
       active = false;
     };
-  }, [currentContact.id]);
+  }, [currentContact.id, userContext.id]);
 
   async function handleSent() {
     await api.sendInvitation(currentContact.id);
@@ -77,74 +97,82 @@ const ContactInfo = ({ currentContact }) => {
   return (
     <div className="bg-white rounded-xl border-2 border-blue-200 dark:border-l-slate-700 py-4 px-6 gap-x-4 dark:bg-slate-900 z-10">
       <p className="dark:text-gray-50">Contact info</p>
-      <div className="flex justify-center mt-10">
-        <div className="flex flex-col items-center">
-          <Avatar user={currentContact} type={"infoFrame"}></Avatar>
+      <div className="flex flex-col items-center mt-5">
+        <Avatar user={currentContact} type={"infoFrame"}></Avatar>
 
-          <p className="dark:text-gray-50 pt-8">
-            {currentContact ? currentContact.name : ""}
-          </p>
-          <p className="dark:text-gray-50">
-            @{currentContact ? currentContact.username : ""}
-          </p>
+        <p className="dark:text-gray-50 mt-3">
+          {currentContact ? currentContact.fullname : ""}
+        </p>
+        <p className="dark:text-gray-50">
+          @{currentContact ? currentContact.username : ""}
+        </p>
 
-          {/* Display invitation request */}
-          <div className="mt-8 hover:cursor-pointer">
-            {requestStatus === "pending" &&
-              friendRequest &&
-              friendRequest.senderId === userContext.id && (
-                <div
-                  onClick={handleRevoke}
-                  className="flex gap-x-3 font-semibold"
-                >
-                  <UserRoundMinus className={styles.icon} />
-                  <p className="text-green-500">Revoke invitation</p>
-                </div>
-              )}
-
-            {requestStatus === "pending" &&
-              friendRequest &&
-              friendRequest.receiverId === userContext.id && (
-                <div className="flex gap-x-3">
-                  <div
-                    onClick={handleAccept}
-                    className="flex gap-3 font-semibold"
-                  >
-                    <UserRoundCheck className={styles.icon} />
-                    <p className="text-green-500">Accept invitation</p>
-                  </div>
-                  <div onClick={handleReject} className="flex gap-3">
-                    <UserRoundX className={styles.icon} />
-                    <p className="text-green-500 font-semibold">
-                      Reject invitation
-                    </p>
-                  </div>
-                </div>
-              )}
-
-            {requestStatus === "" && (
-              <div onClick={handleSent} className="flex gap-3">
-                <UserRoundPlus className={styles.icon} />
-                <p className="text-green-500 font-semibold">Sent invitation</p>
+        {/* Display invitation request */}
+        <div className="hover:cursor-pointer w-full">
+          {requestStatus === "pending" &&
+            friendRequest &&
+            friendRequest.senderId === userContext.id && (
+              <div
+                onClick={handleRevoke}
+                className="flex gap-x-3 font-semibold"
+              >
+                <UserRoundMinus className={styles.icon} />
+                <p className="text-green-500">Revoke invitation</p>
               </div>
             )}
 
-            {requestStatus === "accepted" && (
+          {requestStatus === "pending" &&
+            friendRequest &&
+            friendRequest.receiverId === userContext.id && (
               <div className="flex gap-x-3">
                 <div
-                  onClick={handleUnfriend}
+                  onClick={handleAccept}
                   className="flex gap-3 font-semibold"
                 >
+                  <UserRoundCheck className={styles.icon} />
+                  <p className="text-green-500">Accept invitation</p>
+                </div>
+                <div onClick={handleReject} className="flex gap-3">
                   <UserRoundX className={styles.icon} />
-                  <p className="text-green-500">Unfriend</p>
+                  <p className="text-green-500 font-semibold">
+                    Reject invitation
+                  </p>
                 </div>
               </div>
             )}
-          </div>
+
+          {requestStatus === "" && (
+            <div onClick={handleSent} className="flex gap-3">
+              <UserRoundPlus className={styles.icon} />
+              <p className="text-green-500 font-semibold">Sent invitation</p>
+            </div>
+          )}
+
+          {requestStatus === "accepted" && (
+            <div className="flex gap-x-3">
+              <div
+                onClick={handleUnfriend}
+                className="flex gap-3 font-semibold"
+              >
+                <UserRoundX className={styles.icon} />
+                <p className="text-green-500">Unfriend</p>
+              </div>
+            </div>
+          )}
+
+          {followRequestStatus === "Following" && (
+            <div
+              onClick={handleUnfriend}
+              className="flex gap-3 font-semibold bg-gray-300 w-full py-1 px-2 rounded-lg"
+            >
+              <DoneOutlinedIcon className={styles.icon} />
+              <p >Following</p>
+            </div>
+          )}
         </div>
       </div>
 
-      <p className="dark:text-gray-400">About</p>
+      <p className="dark:text-gray-400 mt-5">About</p>
       <p className="dark:text-gray-50">
         {currentContact && currentContact.about}
       </p>

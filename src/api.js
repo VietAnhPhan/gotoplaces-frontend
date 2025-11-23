@@ -172,7 +172,6 @@ const api = {
 
   getUser: async (username) => {
     try {
-      
       const response = await fetch(`${serverURL}/users?username=${username}`, {
         method: "GET",
         headers: {
@@ -709,6 +708,25 @@ const api = {
       }
 
       const result = await response.json();
+      return result;
+    } catch (err) {
+      console.log(err);
+    }
+  },
+
+  getFollowRequest: async (followerId, followeeId) => {
+    try {
+      const rs = await fetch(
+        `${serverURL}/followRequests?followerId=${followerId}&followeeId=${followeeId}`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: `bearer ${token}`,
+          },
+        }
+      );
+
+      const result = await rs.json();
       return result;
     } catch (err) {
       console.log(err);
