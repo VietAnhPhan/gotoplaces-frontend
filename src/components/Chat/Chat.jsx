@@ -124,7 +124,7 @@ function Chat(props) {
               </div>
             )}
             {!currentConversation && !chatUser && (
-              <div className="col-span-2 flex flex-col justify-center items-center bg-zinc-100 dark:bg-slate-900">
+              <div className="border-2 rounded-xl border-pink-200 col-span-2 flex flex-col justify-center items-center bg-zinc-100 dark:bg-slate-900">
                 <svg
                   viewBox="0 0 303 172"
                   width="360"

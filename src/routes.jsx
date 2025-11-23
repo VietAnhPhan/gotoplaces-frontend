@@ -51,9 +51,9 @@ const router = createBrowserRouter([
         path: "/profile",
         loader: dataLoader,
         element: (
-          // <Wrapper>
+          <Wrapper>
           <Profile sitename={sitename} />
-          // </Wrapper>
+          </Wrapper>
         ),
       },
       {
