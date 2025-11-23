@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import Heading1 from "../Heading/Heading1";
 import api from "../../api";
 import { useLoaderData } from "react-router";
@@ -8,17 +8,20 @@ import Avatar from "../Avatar";
 import { Button } from "../Button";
 import AddPhotoAlternateOutlinedIcon from "@mui/icons-material/AddPhotoAlternateOutlined";
 import { WarningToast } from "../Toast";
+import { HeaderContext } from "../../Context";
 
 function MyPosts() {
   const [posts, setPosts] = useState([]);
   const dataLoader = useLoaderData();
   const previewPhotos = useRef(null);
   const [error, setError] = useState("");
+  const headerContext = useContext(HeaderContext);
 
   useEffect(() => {
     async function fetchData() {
       const myPosts = await api.getPostsByUsername(dataLoader.username);
       setPosts(myPosts);
+      headerContext.setactiveMenuItem("posts");
     }
 
     fetchData();

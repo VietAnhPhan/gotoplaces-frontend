@@ -1,17 +1,20 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Heading1 from "../Heading/Heading1";
 import api from "../../api";
 import LikeNotification from "./LikeNotification";
 import { ContentWrapper } from "../Utilities/Utilities";
+import { HeaderContext } from "../../Context";
 
 function Notifications() {
   const [notifications, setNotifications] = useState([]);
+  const headerContext = useContext(HeaderContext);
 
   useEffect(() => {
     async function fetchData() {
       const notifications = await api.getNotifications();
 
       setNotifications(notifications);
+      headerContext.setactiveMenuItem("notifications");
     }
     fetchData();
   }, []);

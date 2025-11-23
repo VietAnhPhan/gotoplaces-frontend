@@ -1,14 +1,15 @@
 import Heading1 from "./Heading/Heading1";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ContentWrapper } from "./Utilities/Utilities";
 import api from "../api";
-import { UserContext } from "../Context";
+import { HeaderContext, UserContext } from "../Context";
 import Following from "./People/Following";
 
 function FriendList() {
   const [activeTab, setActiveTab] = useState("Followers");
   const [followings, setFollowings] = useState([]);
   const [followers, setFollowers] = useState([]);
+  const headerContext = useContext(HeaderContext);
 
   useEffect(() => {
     async function fetchData() {
@@ -17,6 +18,7 @@ function FriendList() {
 
       setFollowings(followings);
       setFollowers(followers);
+      headerContext.setactiveMenuItem("friends");
     }
 
     fetchData();

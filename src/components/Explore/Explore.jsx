@@ -21,14 +21,13 @@ function Explore() {
   const [activeTab, setActiveTab] = useState("trending");
 
   useEffect(() => {
-    headerContext.setactiveMenuItem("explore");
-
     async function fetchData() {
       const topPeople = await api.getTopPeople();
       const trendingPosts = await api.getTrendingPosts();
 
       setPeople(topPeople);
       setPosts(trendingPosts);
+      headerContext.setactiveMenuItem("explore");
     }
 
     fetchData();
@@ -154,7 +153,7 @@ function Explore() {
                 <p>People</p>
                 <div className="lg:grid lg:grid-cols-2 lg:gap-x-5">
                   {people.map((person) => (
-                    <People key={person.id} person={person}/>
+                    <People key={person.id} person={person} />
                   ))}
                 </div>
               </div>

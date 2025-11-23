@@ -11,6 +11,7 @@ import FeedOutlinedIcon from "@mui/icons-material/FeedOutlined";
 import ChatBubbleOutlineOutlinedIcon from "@mui/icons-material/ChatBubbleOutlineOutlined";
 import PeopleAltOutlinedIcon from "@mui/icons-material/PeopleAltOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
+import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined';
 
 export const Header = ({ loaderData }) => {
   const avatarContext = useContext(AvatarContext);
@@ -107,6 +108,14 @@ export const Header = ({ loaderData }) => {
               } flex items-center gap-x-3`}
             >
               <ChatBubbleOutlineOutlinedIcon fontSize="small" /> Chats
+            </div>
+          </Link>
+
+            <Link to="/posts">
+            <div
+              className={`${styles.menuIconWrapper} flex text-white justify-center items-center gap-x-3 bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500`}
+            >
+              <AddBoxOutlinedIcon fontSize="small" /> New Post
             </div>
           </Link>
         </div>

@@ -6,15 +6,14 @@ import { Loading } from "../Utilities/Utilities";
 
 function Home() {
   const [posts, setPosts] = useState([]);
- 
+
   const headerContext = useContext(HeaderContext);
 
   useEffect(() => {
-    headerContext.setactiveMenuItem("home");
-
     async function fetchData() {
       const posts = await api.getPosts();
       setPosts(posts);
+      headerContext.setactiveMenuItem("home");
     }
 
     fetchData();
@@ -26,11 +25,9 @@ function Home() {
       {posts.length > 0 && (
         <div className="overflow-auto flex-1">
           <div className="grid grid-cols-1 2xl:grid-cols-2 p-7 gap-3 lg:px-40">
-          
-              {posts.map((post) => (
-                <Post key={post.id} author={post.author} post={post} />
-              ))}
-          
+            {posts.map((post) => (
+              <Post key={post.id} author={post.author} post={post} />
+            ))}
           </div>
         </div>
       )}
