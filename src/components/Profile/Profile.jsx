@@ -4,6 +4,8 @@ import { useLoaderData } from "react-router";
 import { AvatarContext, HeaderContext, SupabaseContext } from "../../Context";
 import api from "../../api";
 import Heading1 from "../Heading/Heading1";
+import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
+import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 
 const Profile = (props) => {
   const loaderData = useLoaderData();
@@ -171,7 +173,44 @@ const Profile = (props) => {
               className="dark:text-gray-50 hidden"
               onChange={handleUpload}
             />
+
+            {/* Update button */}
+            <div className="flex gap-2.5 flex-1 h-fit">
+              {isUpdate && (
+                <button
+                  type="submit"
+                  className="mt-5 bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 text-white px-3 py-1 rounded-lg hover:cursor-pointer"
+                >
+                  Save changes
+                </button>
+              )}
+
+              {isUpdate ? (
+                <button
+                  type="button"
+                  className={
+                    "mt-5 bg-gray-300 hover:cursor-pointer px-5 flex items-center gap-x-3 rounded-lg"
+                  }
+                  onClick={handleEdit}
+                >
+                  <CloseOutlinedIcon fontSize="small" />
+                  Cancel
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  className={
+                    "mt-5 bg-green-600 text-white hover:cursor-pointer px-5 py-1 rounded-lg bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 flex items-center gap-x-3"
+                  }
+                  onClick={handleEdit}
+                >
+                  <EditOutlinedIcon fontSize="small" />
+                  Edit Profile
+                </button>
+              )}
+            </div>
           </div>
+
           <div className="flex flex-1 flex-col gap-y-3">
             {/* Fullname */}
             <div className="flex gap-5">
@@ -261,47 +300,6 @@ const Profile = (props) => {
                 className="dark:text-gray-50 p-1.5"
                 onChange={(e) => setPhone(e.target.value)}
               />
-            </div>
-
-            {/* Update button */}
-            <div className="flex gap-2.5">
-              {isUpdate ? (
-                <button
-                  type="submit"
-                  className="mt-5 bg-blue-700 text-white flex-1 p-2 hover:cursor-pointer"
-                >
-                  Update
-                </button>
-              ) : (
-                <button
-                  type="submit"
-                  className="mt-5 text-slate-900 flex-1 bg-gray-300 p-2 hover:cursor-pointer"
-                  disabled
-                >
-                  Update
-                </button>
-              )}
-              {isUpdate ? (
-                <button
-                  type="button"
-                  className={
-                    "mt-5 bg-blue-700 text-white flex-1 hover:cursor-pointer"
-                  }
-                  onClick={handleEdit}
-                >
-                  Cancel
-                </button>
-              ) : (
-                <button
-                  type="button"
-                  className={
-                    "mt-5 bg-green-600 text-white flex-1 hover:cursor-pointer"
-                  }
-                  onClick={handleEdit}
-                >
-                  Edit
-                </button>
-              )}
             </div>
           </div>
         </div>
