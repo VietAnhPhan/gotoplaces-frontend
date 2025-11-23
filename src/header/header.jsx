@@ -26,7 +26,7 @@ export const Header = ({ loaderData }) => {
         >
           <span className="text-white text-xl">✨</span>
         </div>
-        <span className="text-lg bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 bg-clip-text text-transparent">
+        <span className="text-3xl bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 bg-clip-text text-transparent">
           Myinterest
         </span>
       </div>
