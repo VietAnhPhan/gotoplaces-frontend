@@ -22,15 +22,15 @@ const Setting = (props) => {
       <title>{`Settings | ${props.sitename}`}</title>
       <div className="md:grid md:grid-cols-3 flex-1 overflow-y-auto h-full">
         <div className="flex col-span-1 flex-col gap-y-4 border-r border-r-slate-700">
-          <p className="dark:text-gray-50 text-2xl">Settings</p>
+          <p className="text-2xl">Settings</p>
           <ul>
             <li>
               <button
-                className="hover:cursor-pointer dark:text-gray-50 flex gap-x-4"
+                className="hover:cursor-pointer flex gap-x-4"
                 onClick={logout}
               >
                 <svg
-                  className="w-6 h-6 text-gray-800 dark:text-white"
+                  className="w-6 h-6 text-gray-800 "
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
