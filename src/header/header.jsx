@@ -11,7 +11,7 @@ import FeedOutlinedIcon from "@mui/icons-material/FeedOutlined";
 import ChatBubbleOutlineOutlinedIcon from "@mui/icons-material/ChatBubbleOutlineOutlined";
 import PeopleAltOutlinedIcon from "@mui/icons-material/PeopleAltOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
-import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined';
+import AddBoxOutlinedIcon from "@mui/icons-material/AddBoxOutlined";
 
 export const Header = ({ loaderData }) => {
   const avatarContext = useContext(AvatarContext);
@@ -21,11 +21,8 @@ export const Header = ({ loaderData }) => {
     <header className="flex md:flex-col bg-white md:py-8 border-r-[1px] border-r-zinc-300  z-10 w-64 shrink-0">
       {/* Logo */}
       <div className="flex items-center gap-x-4 border-b border-purple-200 px-5 pb-5">
-        <div
-          className={`w-12 h-12 bg-gradient-to-br from-purple-500 via-pink-500 to-blue-500 rounded-xl flex items-center justify-center shadow-lg`}
-        >
-          <span className="text-white text-xl">✨</span>
-        </div>
+        <span className="text-white text-4xl">✨</span>
+
         <span className="text-3xl bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 bg-clip-text text-transparent">
           Myinterest
         </span>
@@ -111,7 +108,7 @@ export const Header = ({ loaderData }) => {
             </div>
           </Link>
 
-            <Link to="/posts">
+          <Link to="/posts">
             <div
               className={`${styles.menuIconWrapper} flex text-white justify-center items-center gap-x-3 bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500`}
             >
