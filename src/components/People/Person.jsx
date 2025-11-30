@@ -4,7 +4,7 @@ import { Button } from "../Button";
 import { ContentWrapper } from "../Utilities/Utilities";
 import { UserContext } from "../../Context";
 
-function People(props) {
+function Person(props) {
   const userContext = useContext(UserContext);
   const [followStatus, setFollowStatus] = useState(
     isFollowing(userContext.id, props.person.followee)
@@ -46,7 +46,7 @@ function People(props) {
   );
 }
 
-export default People;
+export default Person;
 
 function isFollowing(followerId, followers) {
   const isFollowing = followers.map((follower) => {

@@ -4,7 +4,7 @@ import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import Heading1 from "../Heading/Heading1";
 import { ContentWrapper, ContentWrapperNoBorder } from "../Utilities/Utilities";
 import api from "../../api";
-import People from "../People/People";
+import Person from "../People/Person";
 import { Button } from "../Button";
 import Post from "../Post/Post";
 import { WarningToast } from "../Toast";
@@ -129,7 +129,7 @@ function Search() {
                 <p>People</p>
                 <div className="lg:grid lg:grid-cols-2 lg:gap-x-5">
                   {people.map((person) => (
-                    <People key={person.id} user={person} />
+                    <Person key={person.id} person={person} />
                   ))}
                 </div>
               </div>
@@ -174,7 +174,7 @@ function Search() {
                 <p>People</p>
                 <div className="lg:grid lg:grid-cols-2 lg:gap-x-5">
                   {people.map((person) => (
-                    <People key={person.id} user={person} />
+                    <Person key={person.id} person={person} />
                   ))}
                 </div>
               </div>
