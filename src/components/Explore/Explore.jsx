@@ -4,7 +4,7 @@ import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import Heading1 from "../Heading/Heading1";
 import { ContentWrapper, ContentWrapperNoBorder } from "../Utilities/Utilities";
 import api from "../../api";
-import People from "../People/People";
+import People from "../People/Person";
 import { Button } from "../Button";
 import Post from "../Post/Post";
 import TrendingUpOutlinedIcon from "@mui/icons-material/TrendingUpOutlined";
