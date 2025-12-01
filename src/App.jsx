@@ -31,7 +31,13 @@ function App() {
               <Header loaderData={loaderData}></Header>
 
               <SupabaseContext value={supabase}>
-                <Outlet></Outlet>
+                <div className="overflow-auto flex-1">
+                  <div className="grid grid-cols-1 2xl:grid-cols-4 xl:grid-cols-5 p-7">
+                    <div className="2xl:col-start-2 2xl:col-span-2 xl:col-start-2 xl:col-span-3 flex flex-col gap-y-3">
+                      <Outlet></Outlet>
+                    </div>
+                  </div>
+                </div>
               </SupabaseContext>
             </div>
           </HeaderContext>

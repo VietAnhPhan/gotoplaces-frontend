@@ -39,9 +39,9 @@ const router = createBrowserRouter([
         path: "/chats",
         loader: homeLoader,
         element: (
-          <Wrapper>
+          // <Wrapper>
             <Chat sitename={sitename} />
-          </Wrapper>
+          // </Wrapper>
         ),
         errorElement: <ErrorCatching />,
       },
@@ -50,35 +50,35 @@ const router = createBrowserRouter([
         path: "/profile",
         loader: dataLoader,
         element: (
-          <Wrapper>
+          // <Wrapper>
             <Profile sitename={sitename} />
-          </Wrapper>
+          // </Wrapper>
         ),
       },
       {
         path: "/settings",
         element: (
-          <Wrapper>
+          // <Wrapper>
             <Setting sitename={sitename} />
-          </Wrapper>
+          // </Wrapper>
         ),
       },
       {
         path: "/friends",
         loader: friendsLoader,
         element: (
-          <Wrapper>
+          // <Wrapper>
             <FriendList sitename={sitename} />
-          </Wrapper>
+          // </Wrapper>
         ),
       },
       {
         path: "/search",
         loader: friendsLoader,
         element: (
-          <Wrapper>
+          // <Wrapper>
             <Search sitename={sitename} />
-          </Wrapper>
+          // </Wrapper>
         ),
         errorElement: <ErrorCatching />,
       },
@@ -86,9 +86,9 @@ const router = createBrowserRouter([
         path: "/explore",
         loader: friendsLoader,
         element: (
-          <Wrapper>
+          // <Wrapper>
             <Explore sitename={sitename} />
-          </Wrapper>
+          // </Wrapper>
         ),
         errorElement: <ErrorCatching />,
       },
@@ -96,9 +96,9 @@ const router = createBrowserRouter([
         path: "/posts",
         loader: dataLoader,
         element: (
-          <Wrapper>
+          // <Wrapper>
             <MyPosts sitename={sitename} />
-          </Wrapper>
+          // </Wrapper>
         ),
         errorElement: <ErrorCatching />,
         // ErrorBoundary: function ErrorBoundary() {
@@ -110,9 +110,9 @@ const router = createBrowserRouter([
       {
         path: "/notifications",
         element: (
-          <Wrapper>
+          // <Wrapper>
             <Notifications />
-          </Wrapper>
+          // </Wrapper>
         ),
         errorElement: <ErrorCatching />,
       },

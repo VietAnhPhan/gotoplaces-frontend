@@ -24,17 +24,10 @@ function Home() {
   return (
     <>
       {posts.length === 0 && <Loading />}
-      {posts.length > 0 && (
-        <div className="overflow-auto flex-1">
-          <div className="grid grid-cols-1 2xl:grid-cols-4 p-7">
-            <div className="lg:col-start-2 col-span-2 flex flex-col gap-y-3">
-              {posts.map((post) => (
-                <Post key={post.id} author={post.author} post={post} />
-              ))}
-            </div>
-          </div>
-        </div>
-      )}
+      {posts.length > 0 &&
+        posts.map((post) => (
+          <Post key={post.id} author={post.author} post={post} />
+        ))}
     </>
   );
 }

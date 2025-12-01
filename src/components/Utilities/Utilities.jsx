@@ -25,7 +25,7 @@ function ContentWrapperNoBorder({ children }) {
 
 function Loading() {
   return (
-    <div className="flex justify-center items-center flex-1">
+    <div className="absolute left-1/2 top-1/2">
       <h2>🌀Loading...</h2>
     </div>
   );
