@@ -51,7 +51,7 @@ function Signup(props) {
     };
 
     try {
-      const result = await api.signUp(user);
+      const result = await api.auth.signUp(user);
       if (result.errors && result.errors.length > 0) {
         setAuthResults(result);
       }

@@ -23,7 +23,7 @@ function Login(props) {
     const password = formData.get("password");
 
     try {
-      const result = await api.login(username, password);
+      const result = await api.auth.login(username, password);
       if (result.info) {
         setAuthResults(result.info.message);
         return;
