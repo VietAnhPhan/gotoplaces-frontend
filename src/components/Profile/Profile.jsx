@@ -1,7 +1,10 @@
 import { useContext, useEffect, useRef, useState } from "react";
-
-import { useLoaderData } from "react-router";
-import { AvatarContext, HeaderContext, SupabaseContext } from "../../Context";
+import {
+  AvatarContext,
+  HeaderContext,
+  SupabaseContext,
+  UserContext,
+} from "../../Context";
 import Heading1 from "../Heading/Heading1";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
@@ -11,13 +14,13 @@ import useAPI from "../../hooks/useAPI";
 const Profile = () => {
   useTitle("Profile");
   const api = useAPI();
-  const loaderData = useLoaderData();
+  const userContext = useContext(UserContext);
 
   const [password, setPassword] = useState("");
   const [repeatPassword, setrepeatPassword] = useState("");
-  const [fullname, setFullname] = useState(loaderData.fullname);
-  const [about, setAbout] = useState(loaderData.about);
-  const [phone, setPhone] = useState(loaderData.phone);
+  const [fullname, setFullname] = useState(userContext.fullname);
+  const [about, setAbout] = useState(userContext.about);
+  const [phone, setPhone] = useState(userContext.phone);
 
   const [isUpdate, setIsupdate] = useState(false);
   const [result, setResult] = useState("");
@@ -46,9 +49,13 @@ const Profile = () => {
     if (uploadeAvatar.name !== "") {
       const { data, error } = await supabaseContext.storage
         .from("avatars")
-        .upload(`${loaderData.username}/${uploadeAvatar.name}`, uploadeAvatar, {
-          upsert: true,
-        });
+        .upload(
+          `${userContext.username}/${uploadeAvatar.name}`,
+          uploadeAvatar,
+          {
+            upsert: true,
+          }
+        );
 
       if (data) {
         console.log(data);
@@ -79,7 +86,7 @@ const Profile = () => {
       avatarPath: formData.get("avatarPath"),
     };
 
-    const result = await api.user.updateProfile(loaderData.id, userData);
+    const result = await api.user.updateProfile(userContext.id, userData);
 
     if (result.error) {
       setIsupdate(false);
@@ -145,10 +152,10 @@ const Profile = () => {
             <div className="flex">
               <label htmlFor="uploaded-avatar">
                 <div className="w-30 h-30">
-                  {loaderData.avatarPath ? (
+                  {userContext.avatarPath ? (
                     <img
                       className="w-full h-full object-cover object-top rounded-[50%]"
-                      src={`${loaderData.avatarPath}`}
+                      src={`${userContext.avatarPath}`}
                       ref={avatarInputRef}
                     ></img>
                   ) : (
@@ -233,7 +240,7 @@ const Profile = () => {
                     type="text"
                     name="fullname"
                     id="fullname"
-                    className="p-1.5 w-full dark:text-gray-50"
+                    className="p-1.5 w-full "
                     required
                     value={fullname}
                     onChange={(e) => setFullname(e.target.value)}
@@ -246,8 +253,8 @@ const Profile = () => {
                     type="text"
                     name="username"
                     id="username"
-                    className="p-1.5 w-full dark:text-gray-50"
-                    defaultValue={loaderData.username}
+                    className="p-1.5 w-full "
+                    defaultValue={userContext.username}
                   />
                 </div>
               </div>
@@ -259,8 +266,8 @@ const Profile = () => {
                   type="email"
                   name="email"
                   id="email"
-                  className="p-1.5 w-full dark:text-gray-50"
-                  defaultValue={loaderData.email}
+                  className="p-1.5 w-full "
+                  defaultValue={userContext.email}
                   disabled
                 />
               </div>
@@ -271,7 +278,7 @@ const Profile = () => {
                   type="password"
                   name="password"
                   id="password"
-                  className="p-1.5 w-full dark:text-gray-50"
+                  className="p-1.5 w-full "
                   minLength={8}
                   maxLength={30}
                   value={password}
@@ -285,7 +292,7 @@ const Profile = () => {
                   type="password"
                   name="repeat_password"
                   id="repeat_password"
-                  className="p-1.5 w-full dark:text-gray-50"
+                  className="p-1.5 w-full "
                   minLength={8}
                   maxLength={30}
                   value={repeatPassword}
@@ -297,7 +304,7 @@ const Profile = () => {
               <div className="flex flex-col">
                 <label htmlFor="password">About</label>
                 <textarea
-                  className="dark:text-gray-50"
+                  className=""
                   name="about"
                   defaultValue={about}
                   onChange={(e) => setAbout(e.target.value)}
@@ -310,7 +317,7 @@ const Profile = () => {
                   type="tel"
                   name="phone"
                   value={phone ? phone : ""}
-                  className="dark:text-gray-50 p-1.5"
+                  className=" p-1.5"
                   onChange={(e) => setPhone(e.target.value)}
                 />
               </div>

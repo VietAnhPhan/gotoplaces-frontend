@@ -1,13 +1,12 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import Heading1 from "../Heading/Heading1";
-import { useLoaderData } from "react-router";
-import { ContentWrapper, ContentWrapperNoBorder } from "../Utilities/Utilities";
+import { ContentWrapper} from "../Utilities/Utilities";
 import Post from "./Post";
 import Avatar from "../Avatar";
 import { Button } from "../Button";
 import AddPhotoAlternateOutlinedIcon from "@mui/icons-material/AddPhotoAlternateOutlined";
 import { WarningToast } from "../Toast";
-import { HeaderContext, SupabaseContext } from "../../Context";
+import { HeaderContext, SupabaseContext, UserContext } from "../../Context";
 import useTitle from "../../hooks/useTitle";
 import useAPI from "../../hooks/useAPI";
 
@@ -15,7 +14,7 @@ function MyPosts() {
   useTitle("Posts");
   const api = useAPI();
   const [posts, setPosts] = useState([]);
-  const dataLoader = useLoaderData();
+  const userContext = useContext(UserContext);
   const previewPhotos = useRef(null);
   const [error, setError] = useState("");
   const headerContext = useContext(HeaderContext);
@@ -24,7 +23,7 @@ function MyPosts() {
 
   useEffect(() => {
     async function fetchData() {
-      const myPosts = await api.post.getPostsByUsername(dataLoader.username);
+      const myPosts = await api.post.getPostsByUsername(userContext.username);
       setPosts(myPosts);
       headerContext.setactiveMenuItem("posts");
     }
@@ -68,7 +67,7 @@ function MyPosts() {
     for (const selectedPhoto of selectedPhotos) {
       const { data, error } = await supabaseContext.storage
         .from("posts")
-        .upload(`${dataLoader.username}/${selectedPhoto.name}`, selectedPhoto, {
+        .upload(`${userContext.username}/${selectedPhoto.name}`, selectedPhoto, {
           upsert: true,
         });
 
@@ -106,7 +105,7 @@ function MyPosts() {
       <ContentWrapper>
         <form action={handlePost}>
           <div className="flex gap-x-5">
-            <Avatar user={dataLoader} type={"chatFrame"} />
+            <Avatar user={userContext} type={"chatFrame"} />
             <textarea
               name="content"
               className="flex-1 min-h-32 resize-none p-3 border border-purple-200 focus:border-purple-400 rounded-lg bg-purple-50/30"

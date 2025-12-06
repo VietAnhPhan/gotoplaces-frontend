@@ -30,90 +30,48 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        loader: homeLoader,
         element: <Home sitename={sitename} />,
         errorElement: <ErrorCatching />,
-        // HydrateFallback: Setting,
       },
       {
         path: "/chats",
-        loader: homeLoader,
-        element: (
-          // <Wrapper>
-          <Chat sitename={sitename} />
-          // </Wrapper>
-        ),
+        loader: chatLoader,
+        element: <Chat sitename={sitename} />,
         errorElement: <ErrorCatching />,
       },
 
       {
         path: "/profile",
-        loader: dataLoader,
-        element: (
-          // <Wrapper>
-          <Profile sitename={sitename} />
-          // </Wrapper>
-        ),
+        element: <Profile sitename={sitename} />,
+        errorElement: <ErrorCatching />,
       },
       {
         path: "/settings",
-        element: (
-          // <Wrapper>
-          <Setting sitename={sitename} />
-          // </Wrapper>
-        ),
+        element: <Setting sitename={sitename} />,
       },
       {
         path: "/friends",
         loader: friendsLoader,
-        element: (
-          // <Wrapper>
-          <FriendList sitename={sitename} />
-          // </Wrapper>
-        ),
+        element: <FriendList sitename={sitename} />,
       },
       {
         path: "/search",
-        loader: friendsLoader,
-        element: (
-          // <Wrapper>
-          <Search sitename={sitename} />
-          // </Wrapper>
-        ),
+        element: <Search sitename={sitename} />,
         errorElement: <ErrorCatching />,
       },
       {
         path: "/explore",
-        loader: friendsLoader,
-        element: (
-          // <Wrapper>
-          <Explore sitename={sitename} />
-          // </Wrapper>
-        ),
+        element: <Explore sitename={sitename} />,
         errorElement: <ErrorCatching />,
       },
       {
         path: "/posts",
-        loader: dataLoader,
-        element: (
-          // <Wrapper>
-          <MyPosts sitename={sitename} />
-          // </Wrapper>
-        ),
+        element: <MyPosts sitename={sitename} />,
         errorElement: <ErrorCatching />,
-        // ErrorBoundary: function ErrorBoundary() {
-        //   let error = useRouteError();
-        //   console.error(error);
-        //   return <>Dang!</>;
-        // },
       },
       {
         path: "/notifications",
-        element: (
-          // <Wrapper>
-          <Notifications />
-          // </Wrapper>
-        ),
+        element: <Notifications />,
         errorElement: <ErrorCatching />,
       },
     ],
@@ -155,7 +113,7 @@ function dataLoader({ context }) {
   return user;
 }
 
-async function homeLoader({ context }) {
+async function chatLoader({ context }) {
   const user = context.get(UserContext);
   const conversations = await api.getConversations(user.id);
   let chatUser = null;
