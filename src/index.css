@@ -17,12 +17,16 @@
 @theme {
   --animate-disappear: disappear 3s ease-in-out normal;
   @keyframes disappear {
-    0%{},
+    0% {
+    }
+    ,
     100% {
       transform: rotate(-3deg);
     }
-  
   }
+  --color-branding-primary: #b60381;
+  --color-branding-secondary: #cc1695;
+
 }
 
 :root {

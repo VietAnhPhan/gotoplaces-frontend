@@ -1,7 +1,7 @@
 import styles from "./Login.module.css";
 import { ErrorBoundary } from "react-error-boundary";
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 // import api from "../../api";
 import useAPI from "../../hooks/useAPI";
 import { useLoginTemplate } from "../../hooks/useLoginTemplate";
