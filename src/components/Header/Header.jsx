@@ -11,26 +11,43 @@ import PeopleAltOutlinedIcon from "@mui/icons-material/PeopleAltOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import AddBoxOutlinedIcon from "@mui/icons-material/AddBoxOutlined";
 import useAuth from "../../hooks/useAuth";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { HeaderContext } from "../../Context";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 
 export const Header = () => {
   const headerContext = useContext(HeaderContext);
   const auth = useAuth();
+  const [isOpenned, setIsOpenned] = useState(false);
+
+  function handleOpen() {
+    if (isOpenned) {
+      setIsOpenned(false);
+    } else if (!isOpenned) {
+      setIsOpenned(true);
+    }
+  }
 
   return (
-    <header className="flex md:flex-col bg-white md:py-8 border-r-[1px] border-r-zinc-300  z-10 w-64 shrink-0">
+    <header className="flex md:flex-col bg-white md:py-8 border-r-[1px] border-r-zinc-300 z-10 shrink-0">
       {/* Logo */}
       <div className="flex items-center gap-x-4 border-b border-purple-200 px-5 pb-5">
-        <span className="text-white text-4xl">✨</span>
+        {/* <span className="text-white text-4xl">✨</span> */}
 
-        <span className="text-3xl bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 bg-clip-text text-transparent">
-          Gotoplaces
+        <span className="text-3xl font-bold">
+          {isOpenned && "Social Media"}
+          {!isOpenned && "SM"}
         </span>
       </div>
       {/* Menu items */}
       <div className="px-5 pt-10 flex-1">
         <div className="flex flex-col gap-y-3 text-sm">
+          <div className={`${styles.menuIconWrapper} flex-1 hover:cursor-pointer`} onClick={handleOpen}>
+            {!isOpenned && <ArrowForwardIosIcon />}
+            {isOpenned && <ArrowBackIosNewIcon />}
+          </div>
+
           <Link to="/">
             <div
               className={`${styles.menuIconWrapper} ${
@@ -39,9 +56,11 @@ export const Header = () => {
                   : ""
               } flex items-center gap-x-3`}
             >
-              <HomeOutlinedIcon fontSize="medium" /> Home
+              <HomeOutlinedIcon fontSize="medium" />
+              {isOpenned && <span>Home</span>}
             </div>
           </Link>
+
           <Link to="/search">
             <div
               className={`${styles.menuIconWrapper} ${
@@ -50,9 +69,11 @@ export const Header = () => {
                   : ""
               } flex items-center gap-x-3`}
             >
-              <SearchOutlinedIcon fontSize="medium" /> Search
+              <SearchOutlinedIcon fontSize="medium" />
+              {isOpenned && <span>Search</span>}
             </div>
           </Link>
+
           <Link to="/explore">
             <div
               className={`${styles.menuIconWrapper} ${
@@ -61,9 +82,11 @@ export const Header = () => {
                   : ""
               } flex items-center gap-x-3`}
             >
-              <ExploreOutlinedIcon fontSize="medium" /> Explore
+              <ExploreOutlinedIcon fontSize="medium" />
+              {isOpenned && <span>Explore</span>}
             </div>
           </Link>
+
           <Link to="/notifications">
             <div
               className={`${styles.menuIconWrapper} ${
@@ -72,9 +95,11 @@ export const Header = () => {
                   : ""
               } flex items-center gap-x-3`}
             >
-              <NotificationsNoneOutlinedIcon fontSize="medium" /> Notifications
+              <NotificationsNoneOutlinedIcon fontSize="medium" />
+              {isOpenned && <span>Notifications</span>}
             </div>
           </Link>
+
           <Link to="/friends">
             <div
               className={`${styles.menuIconWrapper} ${
@@ -83,9 +108,11 @@ export const Header = () => {
                   : ""
               } flex items-center gap-x-3`}
             >
-              <PeopleAltOutlinedIcon fontSize="medium" /> Friends
+              <PeopleAltOutlinedIcon fontSize="medium" />
+              {isOpenned && <span>Friends</span>}
             </div>
           </Link>
+
           <Link to="/posts">
             <div
               className={`${styles.menuIconWrapper} ${
@@ -94,9 +121,11 @@ export const Header = () => {
                   : ""
               } flex items-center gap-x-3`}
             >
-              <FeedOutlinedIcon fontSize="medium" /> Posts
+              <FeedOutlinedIcon fontSize="medium" />
+              {isOpenned && <span>Posts</span>}
             </div>
           </Link>
+
           <Link to="/chats">
             <div
               className={`${styles.menuIconWrapper} ${
@@ -105,15 +134,19 @@ export const Header = () => {
                   : ""
               } flex items-center gap-x-3`}
             >
-              <ChatBubbleOutlineOutlinedIcon fontSize="medium" /> Chats
+              <ChatBubbleOutlineOutlinedIcon fontSize="medium" />
+              {isOpenned && <span>Chats</span>}
             </div>
           </Link>
 
           <Link to="/posts">
             <div
-              className={`${styles.menuIconWrapper} flex text-white justify-center items-center gap-x-3 bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500`}
+              className={`${styles.menuIconWrapper} ${
+                isOpenned && "flex items-center gap-x-3"
+              }`}
             >
-              <AddBoxOutlinedIcon fontSize="medium" /> New Post
+              <AddBoxOutlinedIcon fontSize="medium" />
+              {isOpenned && <span>New Post</span>}
             </div>
           </Link>
         </div>
@@ -130,7 +163,8 @@ export const Header = () => {
                   : ""
               } flex items-center gap-x-3`}
             >
-              <SettingsOutlinedIcon className={styles.menuIcon} /> Settings
+              <SettingsOutlinedIcon className={styles.menuIcon} />
+              {isOpenned && <span>Settings</span>}
             </div>
 
             {/* Profile */}
@@ -171,9 +205,9 @@ export const Header = () => {
                 )}
 
                 <div>
-                  <p>{auth && auth.fullname}</p>
+                  {/* <p>{auth && auth.fullname}</p> */}
                   <p className="text-xs text-gray-500">
-                    {auth && <>@{auth.username}</>}
+                    {isOpenned && auth && <>@{auth.username}</>}
                   </p>
                 </div>
               </div>
