@@ -7,7 +7,7 @@ function ContentWrapper(props) {
       <div
         className={`mt-7 ${props.bgColor ? props.bgColor : "bg-white"} ${
           props.paddingBlock ? props.paddingBlock : "p-5"
-        } rounded-xl border-purple-200 border-2`}
+        } rounded-xl border border-zinc-300`}
       >
         {props.children}
       </div>

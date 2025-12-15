@@ -146,7 +146,7 @@ const Profile = () => {
       {!isLoading && (
         <form
           action={handleUpdate}
-          className="profile__form bg-white p-10 rounded-xl border-purple-200 border-2 mt-5"
+          className="profile__form bg-white p-10 rounded-xl border border-gray-300 mt-5"
         >
           <div className="flex flex-col gap-y-5">
             {/* Avatar */}
@@ -200,7 +200,7 @@ const Profile = () => {
                 {isUpdate && (
                   <button
                     type="submit"
-                    className="mt-5 bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 text-white px-3 py-1 rounded-lg hover:cursor-pointer"
+                    className="mt-5 bg-blue-500 text-white px-3 py-1 rounded-lg hover:cursor-pointer"
                   >
                     Save changes
                   </button>
@@ -221,7 +221,7 @@ const Profile = () => {
                   <button
                     type="button"
                     className={
-                      "mt-5 bg-green-600 text-white hover:cursor-pointer px-5 py-1 rounded-lg bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 flex items-center gap-x-3"
+                      "mt-5 bg-blue-500 text-white hover:cursor-pointer px-5 py-1 rounded-lg flex items-center gap-x-3"
                     }
                     onClick={handleEdit}
                   >

@@ -75,7 +75,7 @@ function Search() {
         {instruction && (
           <ContentWrapper>
             <div className="text-center my-5">
-              <div className="bg-gradient-to-br from-purple-500 via-pink-500 to-blue-500 inline-block p-7 rounded-full text-white">
+              <div className="inline-block p-7 rounded-full bg-gray-200">
                 <SearchOutlinedIcon fontSize="large" />
               </div>
               <h3 className="text-xl mt-5">Start searching</h3>
