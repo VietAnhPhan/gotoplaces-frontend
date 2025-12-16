@@ -188,7 +188,7 @@ export const Header = () => {
                   </div>
                 ) : (
                   <svg
-                    className="w-[48px] h-[48px] dark:text-gray-50"
+                    // className="w-[48px] h-[48px]"
                     aria-hidden="true"
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"

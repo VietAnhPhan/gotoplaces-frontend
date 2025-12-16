@@ -123,7 +123,7 @@ function Explore() {
               <div className="mt-10">
                 <p>Posts</p>
 
-                <div className="grid grid-cols-1 gap-5">
+                <div className="grid grid-cols-1 mt-7">
                   {posts.map((post) => (
                     <Post key={post.id} author={post.author} post={post} />
                   ))}
