@@ -84,7 +84,12 @@ function Post(props) {
               <p className="text-[15px] mt-1">
                 {props.post.body.slice(0, 146)}
               </p>
-
+              {/* Post Media */}
+              {props.post.PostMedia &&
+                props.post.PostMedia.length > 0 &&
+                props.post.PostMedia.map((postMedia) => (
+                  <img key={postMedia.id} src={postMedia.filePath}></img>
+                ))}
               {/* Interaction */}
               <PostInteraction
                 isLiked={isLiked}
@@ -95,12 +100,6 @@ function Post(props) {
               />
             </div>
           </div>
-
-          {props.post.PostMedia &&
-            props.post.PostMedia.length > 0 &&
-            props.post.PostMedia.map((postMedia) => (
-              <img key={postMedia.id} src={postMedia.filePath}></img>
-            ))}
         </div>
 
         {/* Comment form */}
